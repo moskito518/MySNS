@@ -49,7 +49,7 @@
 				<!-- user -->
             <ul id="user">
                <li class="first highlight">您好！欢迎您,<?php echo $this->admin['admin_name']; ?></li>
-               <li><a href="<?php echo site_url('system/logout')?>">退出登录</a></li>
+               <li><a href="<?php echo site_url('systemadmin/logout')?>">退出登录</a></li>
                <li class="highlight last"><a href="">网站首页</a></li>
             </ul>
             <!-- end user -->

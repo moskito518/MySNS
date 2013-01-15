@@ -13,7 +13,7 @@ class Role extends MY_Controller{
 		$this->load->library('pagination');
 		$this->load->helper('form');
 		
-		$roleCount = $this->base_model->getCount('role');
+		$roleCount = $this->base_model->getCount('admin_role');
 		$config['base_url'] = site_url('system/role/index');
 		$config['total_rows'] = $roleCount;
 		$config['per_page'] = 20;
@@ -26,7 +26,7 @@ class Role extends MY_Controller{
 		$page = ($this->uri->segment(4) > 1) ? ($this->uri->segment(4) - 1) : 0;
 		$offset = $page * $config['per_page'];
 		
-		$roleRow = $this->base_model->getData('role', $where, '', 'id desc', $limit, $offset);
+		$roleRow = $this->base_model->getData('admin_role', $where, '', 'id desc', $limit, $offset);
 		
 		$data['total_page'] = round($config['total_rows'] / $config['per_page']);
 		$data['cur_page'] = $this->uri->segment(4) ? $this->uri->segment(4) : 1;
@@ -58,7 +58,7 @@ class Role extends MY_Controller{
 		$this->form_validation->set_rules($validation);
 		
 		if($this->form_validation->run() === FALSE){
-			$rightRow = $this->base_model->getData('right');
+			$rightRow = $this->base_model->getData('admin_right');
 			$data['rightRow'] = $rightRow;
 			$this->load->view('system/role/role_add', $data);
 		}else{
@@ -68,14 +68,14 @@ class Role extends MY_Controller{
 			
 			$rightsIdArray = $this->input->post('right');
 			$where = "id in(" . join(',', $rightsIdArray) . ")";
-			$rightsRow = $this->base_model->getData('right', $where);
+			$rightsRow = $this->base_model->getData('admin_right', $where);
 			$rightsArray = array();
 			foreach($rightsRow as $key => $val){
 				$rightsArray[] = trim($val['right'], ',');
 			}
 			
 			$roleData['rights'] = join(',', $rightsArray);
-			$this->base_model->addData('role', $roleData);
+			$this->base_model->addData('admin_role', $roleData);
 			util::showMessage('添加成功!', site_url('system/role'));
 		}
 	}
@@ -111,9 +111,9 @@ class Role extends MY_Controller{
 			$id = $this->uri->segment(4);
 			
 			$where = "id = '" . $id . "'";
-			$roleRow = $this->base_model->getDataRow('role', $where);
+			$roleRow = $this->base_model->getDataRow('admin_role', $where);
 			
-			$rightRow = $this->base_model->getData('right');
+			$rightRow = $this->base_model->getData('admin_right');
 			if(count($roleRow) > 0 && count($rightRow) > 0){
 				foreach($rightRow as $key => $val){
 					if(strpos($roleRow['rights'], $val['right']) !== FALSE){
@@ -133,7 +133,7 @@ class Role extends MY_Controller{
 			
 			$rightsIdArray = $this->input->post('right');
 			$where = "id in (" . join(',', $rightsIdArray) . ")";
-			$rightsRow = $this->base_model->getData('right', $where);
+			$rightsRow = $this->base_model->getData('admin_right', $where);
 			
 			$rightsData = array();
 			
@@ -145,7 +145,7 @@ class Role extends MY_Controller{
 			
 			$id = $this->input->post('id');
 			$editWhere = "id = '" . $id . "'";
-			$this->base_model->editData('role', $editWhere, $updata);
+			$this->base_model->editData('admin_role', $editWhere, $updata);
 			util::showMessage('修改成功', site_url('system/role'));
 		}
 	}
@@ -155,14 +155,14 @@ class Role extends MY_Controller{
 		$id = $this->uri->segment(4);
 		
 		$checkUserWhere = "role = '" . $id . "'";
-		$checkUserData = $this->base_model->getData('user', $checkUserWhere);
+		$checkUserData = $this->base_model->getData('admin', $checkUserWhere);
 		
 		if(count($checkUserData) > 0){
 			util::showMessage('角色下还有用户，请删除用户后再删除角色!');
 			exit;
 		}else{
 			$delWhere = "id = '" . $id . "'";
-			$this->base_model->delData('role', $delWhere);
+			$this->base_model->delData('admin_role', $delWhere);
 			util::showMessage('删除成功');
 		}
 	}
@@ -173,14 +173,14 @@ class Role extends MY_Controller{
 		$ids = implode(',', $ids);
 		
 		$checkUserWhere = "role in(" . $ids . ")";
-		$checkUserData = $this->base_model->getData('user', $checkUserWhere);
+		$checkUserData = $this->base_model->getData('admin', $checkUserWhere);
 		
 		if(count($checkUserData) > 0){
 			util::showMessage('角色下还有用户，请删除用户后再删除角色!');
 			exit;
 		}else{
 			$delWhere = "id in(" . $ids . ")";
-			$this->base_model->delData('role', $delWhere);
+			$this->base_model->delData('admin_role', $delWhere);
 			util::showMessage('删除成功');
 		}
 	}

@@ -4,10 +4,10 @@
    <div class="title">
       <h5><?php echo $page_title; ?></h5>
       <ul class="links">
-         <li><?php echo anchor('system/user/add', '添加新用户'); ?></li>
+         <li><?php echo anchor('system/admin/add', '添加新用户'); ?></li>
       </ul>
    </div>
-   <?php echo form_open('system/user/all_delete'); ?>
+   <?php echo form_open('system/admin/all_delete'); ?>
       <div class="table">
          <table>
             <col width="45%" />
@@ -33,8 +33,8 @@
                   <td class="date"><?php echo !empty($user_item['role_name']) ? $user_item['role_name'] : '超级管理员'; ?></td>
                   <td class="date"><?php echo $user_item['create_time']; ?></td>
                   <td class="operation">
-                     <?php echo anchor('system/user/edit/' . $user_item['id'], '［编辑］');?>
-					 <a href="javascript:void(0);" onclick="delModel('<?php echo site_url('system/user/delete/'.$user_item['id']); ?>');">删除</a>
+                     <?php echo anchor('system/admin/edit/' . $user_item['id'], '［编辑］');?>
+					 <a href="javascript:void(0);" onclick="delModel('<?php echo site_url('system/admin/delete/'.$user_item['id']); ?>');">删除</a>
                   </td>
                   <td class="last">
                      <input type="checkbox" name='id[]' value="<?php echo $user_item['id']?>" />

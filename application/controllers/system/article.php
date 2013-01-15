@@ -38,7 +38,7 @@ class Article extends MY_Controller{
 				}
 			}
 			
-			$authorData = $this->base_model->getData('user');
+			$authorData = $this->base_model->getData('admin');
 			
 			foreach($articleRow as $articleKey => $articleVal){
 				foreach($authorData as $authorItem){
@@ -49,7 +49,8 @@ class Article extends MY_Controller{
 			}
 			
 			$data['articles'] = $articleRow;
-			$data['total_page'] = round($config['total_rows'] / $config['per_page']);
+			$total_page = round($config['total_rows'] / $config['per_page']);
+			$data['total_page'] = $total_page == 0 ? 1 : $total_page;
 			$data['cur_page'] = $this->uri->segment(4) ? $this->uri->segment(4) : 1;
 		 	
 			$this->load->view('system/article/article_list', $data);

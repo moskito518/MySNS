@@ -26,16 +26,16 @@ class MY_Controller extends CI_Controller{
 		$admin['admin_role'] = $this->session->userdata['admin_role'];
 		
 		if($admin['admin_name'] == null && $admin['admin_id'] == null){
-			redirect('system/login');
+			redirect('systemadmin/login');
 			exit;
 		}
 		
 		$admin_where = "id = '" . $admin['admin_id'] . "'";
-		$admin_row = $this->base_model->getDataRow('user', $admin_where);
+		$admin_row = $this->base_model->getDataRow('admin', $admin_where);
 		if(!empty($admin_row)){
 			if($admin_row['role'] != 0){
 				$role_where = "id = '" . $admin_row['role'] . "'";
-				$role_row = $this->base_model->getDataRow('role', $role_where);
+				$role_row = $this->base_model->getDataRow('admin_role', $role_where);
 				if($this->checkRight($role_row['rights']) === FALSE){
 					util::showMessage('没有权限！');
 					exit;

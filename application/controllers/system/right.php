@@ -11,7 +11,7 @@ class Right extends MY_Controller{
 		$data['page_title'] = '权限列表';
 		$this->load->helper('form');
 		
-		$rightRow = $this->base_model->getData('right');
+		$rightRow = $this->base_model->getData('admin_right');
 		$data['rightRow'] = $rightRow;
 		$this->load->view('system/right/right_list', $data);
 	}
@@ -47,7 +47,7 @@ class Right extends MY_Controller{
 				'right' => trim($this->input->post('right'))
 			);
 			
-			$this->base_model->addData('right', $rightData);
+			$this->base_model->addData('admin_right', $rightData);
 			util::showMessage('添加成功！', site_url('system/right'));
 		}
 	}
@@ -82,7 +82,7 @@ class Right extends MY_Controller{
 		if($this->form_validation->run() === FALSE){
 			$id = $this->uri->segment(4);
 			$where = "id = '" . $id . "'";
-			$rightRow = $this->base_model->getDataRow('right', $where);
+			$rightRow = $this->base_model->getDataRow('admin_right', $where);
 			
 			$data['id'] = $id;
 			$data['rightRow'] = $rightRow;
@@ -96,7 +96,7 @@ class Right extends MY_Controller{
 			
 			$id = $this->input->post('id');
 			$editWhere = "id = '" . $id . "'";
-			$this->base_model->editData('right', $editWhere, $rightData);
+			$this->base_model->editData('admin_right', $editWhere, $rightData);
 			util::showMessage('修改成功！', site_url('system/right'));
 		}
 	}
@@ -106,10 +106,10 @@ class Right extends MY_Controller{
 		$id = $this->uri->segment(4);
 		
 		$where = "id = '" . $id . "'";
-		$rightRow = $this->base_model->getDataRow('right', $where);
+		$rightRow = $this->base_model->getDataRow('admin_right', $where);
 		
 		$role_where = "rights like '%" . $rightRow['right'] . "%'";
-		$role_array = $this->base_model->getData('role', $role_where);
+		$role_array = $this->base_model->getData('admin_role', $role_where);
 		
 		//批量修改用户组权限
 		foreach($role_array as $role_item){
@@ -119,10 +119,10 @@ class Right extends MY_Controller{
 			$updata = array(
 				'rights' => $role_item['rights']
 			);
-			$this->base_model->editData('role', $role_item_where, $updata);
+			$this->base_model->editData('admin_role', $role_item_where, $updata);
 		}
 		
-		$this->base_model->delData('right', $where);
+		$this->base_model->delData('admin_right', $where);
 		util::showMessage('删除成功');
 	}
 	
@@ -132,12 +132,12 @@ class Right extends MY_Controller{
 		$ids = implode(',', $ids);
 		
 		$where = "id in(" . $ids . ")";
-		$rightData = $this->base_model->getData('right', $where);
+		$rightData = $this->base_model->getData('admin_right', $where);
 		
 		//批量修改用户组权限
 		foreach($rightData as $rightItem){
 			$role_where = "rights like '%" . $rightItem['right'] . "%'";
-			$roleData = $this->base_model->getData('role', $role_where);
+			$roleData = $this->base_model->getData('admin_role', $role_where);
 			
 			foreach($roleData as $roleItem){
 				$roleItem['rights'] = ',' . trim($roleItem['rights']) . ',';
@@ -146,11 +146,11 @@ class Right extends MY_Controller{
 				$updata = array(
 					'rights' => $roleItem['rights']
 				);
-				$this->base_model->editData('role', $roleItemWhere, $updata);
+				$this->base_model->editData('admin_role', $roleItemWhere, $updata);
 			}
 		}
 		
-		$this->base_model->delData('right', $where);
+		$this->base_model->delData('admin_right', $where);
 		util::showMessage('删除成功！');
 	}
 }

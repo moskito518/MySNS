@@ -14,13 +14,13 @@ class Menu{
 	
 	public static $menu = array(
 		'系统' => array(
-			'后台首页' => 'admin',
-			'用户列表' => 'user',
+			'后台首页' => 'option',
+			'用户列表' => 'admin',
 			'权限列表' => 'right',
 			'角色列表' => 'role',
-			'站点设置' => 'admin/site_config',
-			'基本设置' => 'admin/base_config',
-			'邮件设置' => 'admin/email_config'
+			'站点设置' => 'option/site_config',
+			'基本设置' => 'option/base_config',
+			'邮件设置' => 'option/email_config'
 		),
 		'文章' => array(
 			'文章列表' => 'article',

@@ -38,9 +38,10 @@
 |
 */
 
-$route['system/login'] = "system/system/login";
-$route['system/logout'] = "system/system/logout";
-$route['default_controller'] = "system/system/login";
+$route['systemadmin/login'] = "system/systemadmin/login";
+$route['systemadmin/logout'] = "system/systemadmin/logout";
+$route['systemadmin'] = "system/systemadmin/login";
+$route['default_controller'] = "system/systemadmin/login";
 $route['404_override'] = '';
 
 
