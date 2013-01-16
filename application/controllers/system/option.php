@@ -4,6 +4,8 @@ class Option extends MY_Controller{
 	
 	public function __construct(){
 		parent::__construct();
+		$this->checkAdminRights();
+		$this->load->library('menu');
 	}
 	
 	//后台首页
@@ -55,31 +57,11 @@ class Option extends MY_Controller{
 		$this->load->library('form_validation');
 		
 		$validation = array(
-			array(
-				'field' => 'var_name',
-				'label' => '变量名',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'title',
-				'label' => '设置名称',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'category',
-				'label' => '配置分类',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'value',
-				'label' => '值',
-				'rules' => ''
-			),
-			array(
-				'field' => 'status',
-				'label' => '状态',
-				'rules' => 'required'
-			)
+			array('field' => 'var_name','label' => '变量名','rules' => 'required'),
+			array('field' => 'title','label' => '设置名称','rules' => 'required'),
+			array('field' => 'category','label' => '配置分类','rules' => 'required'	),
+			array('field' => 'value','label' => '值','rules' => ''),
+			array('field' => 'status','label' => '状态','rules' => 'required')
 		);
 		
 		$this->form_validation->set_rules($validation);
@@ -124,41 +106,13 @@ class Option extends MY_Controller{
 		$this->load->library('form_validation');
 		
 		$validation = array(
-			array(
-				'field' => 'var_name',
-				'label' => '变量名',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'title',
-				'label' => '设置名称',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'category',
-				'label' => '配置分类',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'type',
-				'label' => '类型',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'value',
-				'label' => '值',
-				'rules' => ''
-			),
-			array(
-				'field' => 'status',
-				'label' => '状态',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'id',
-				'label' => 'id',
-				'rules' => 'required'
-			)
+			array('field' => 'var_name','label' => '变量名','rules' => 'required'),
+			array('field' => 'title','label' => '设置名称','rules' => 'required'),
+			array('field' => 'category','label' => '配置分类','rules' => 'required'	),
+			array('field' => 'type','label' => '类型','rules' => 'required'),
+			array('field' => 'value','label' => '值','rules' => ''),
+			array('field' => 'status','label' => '状态','rules' => 'required'),
+			array('field' => 'id','label' => 'id','rules' => 'required')
 		);
 		
 		$this->form_validation->set_rules($validation);
@@ -222,20 +176,12 @@ class Option extends MY_Controller{
 		//循环添加表单验证规则
 		foreach($base_config_data as $val){
 			if($val['var_name'] != 'logo_img'){
-				$validation[] = array(
-					'field' => $val['var_name'],
-					'label' => $val['title'],
-					'rules' => 'required'
-				);
+				$validation[] = array('field' => $val['var_name'],'label' => $val['title'],	'rules' => 'required');
 			}
 		}
 		
 		//加入以前LOGO的验证
-		$validation[] = array(
-			'field' => 'old_img',
-			'label' => 'old_img',
-			'rules' => 'required'
-		);
+		$validation[] = array('field' => 'old_img',	'label' => 'old_img','rules' => 'required');
 		
 		$this->form_validation->set_rules($validation);
 		
@@ -288,11 +234,7 @@ class Option extends MY_Controller{
 		
 		//循环添加表单验证规则
 		foreach($email_config_data as $val){
-			$validation[] = array(
-				'field' => $val['var_name'],
-				'label' => $val['title'],
-				'rules' => 'required'
-			);
+			$validation[] = array('field' => $val['var_name'],'label' => $val['title'],	'rules' => 'required');
 		}
 		
 		$this->form_validation->set_rules($validation);

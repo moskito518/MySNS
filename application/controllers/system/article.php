@@ -4,6 +4,8 @@ class Article extends MY_Controller{
 	
 	public function __construct(){
 		parent::__construct();
+		$this->checkAdminRights();
+		$this->load->library('menu');
 	}
 	
 	//文章列表首页
@@ -66,16 +68,8 @@ class Article extends MY_Controller{
 		$this->load->helper('date');
 		
 		$validation = array(
-			array(
-				'field' => 'title',
-				'label' => '文章名称',
-				'rules' => 'required|max_length[24]|min_length[4]'
-			),
-			array(
-				'field' => 'content',
-				'label' => '文章内容',
-				'rules' => 'required'
-			),
+			array('field' => 'title','label' => '文章名称',	'rules' => 'required|max_length[24]|min_length[4]'),
+			array('field' => 'content','label' => '文章内容','rules' => 'required'),
 		);
 		
 		$this->form_validation->set_rules($validation);
@@ -107,21 +101,9 @@ class Article extends MY_Controller{
 		$this->load->library('form_validation');
 	
 		$validation = array(
-			array(
-				'field' => 'id',
-				'label' => 'id',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'title',
-				'label' => '文章名称',
-				'rules' => 'required|max_length[24]|min_length[4]'
-			),
-			array(
-				'field' => 'content',
-				'label' => '文章内容',
-				'rules' => 'required'
-			)
+			array('field' => 'id','label' => 'id','rules' => 'required'	),
+			array('field' => 'title','label' => '文章名称','rules' => 'required|max_length[24]|min_length[4]'),
+			array('field' => 'content','label' => '文章内容','rules' => 'required')
 		);
 		
 		$this->form_validation->set_rules($validation);

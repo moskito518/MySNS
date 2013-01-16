@@ -6,12 +6,9 @@ class MY_Controller extends CI_Controller{
 	
 	public function __construct(){
 		parent::__construct();
-		global $config;
 		$this->load->helper('url');
 		$this->load->library('util');
 		$this->load->model('base_model');
-		$this->load->library('menu');
-		$this->checkAdminRights();
 		$this->site_config = $this->loadSiteConfig();
 		
 	}

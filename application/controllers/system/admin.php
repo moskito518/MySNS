@@ -2,6 +2,8 @@
 class Admin extends MY_Controller{
 	public function __construct(){
 		parent::__construct();
+		$this->checkAdminRights();
+		$this->load->library('menu');
 	}
 	
 	//用户列表
@@ -52,31 +54,11 @@ class Admin extends MY_Controller{
 		$this->load->helper('date');
 		
 		$validation = array(
-			array(
-				'field' => 'name',
-				'label' => '用户名',
-				'rules' => 'required|max_length[24]|min_length[4]'
-			),
-			array(
-				'field' => 'role',
-				'label' => '用户组',
-				'rules' => 'required|is_natural_no_zero'
-			),
-			array(
-				'field' => 'password',
-				'label' => '密码',
-				'rules' => 'required|max_length[32]|min_length[6]'
-			),
-			array(
-				'field' => 'repassword',
-				'label' => '确认密码',
-				'rules' => 'required|max_length[32]|min_length[6]|matches[password]'
-			),
-			array(
-				'field' => 'email',
-				'label' => '邮箱',
-				'rules' => 'required|valid_email'
-			)
+			array('field' => 'name', 'label' => '用户名', 'rules' => 'required|max_length[24]|min_length[4]'),
+			array('field' => 'role', 'label' => '用户组', 'rules' => 'required|is_natural_no_zero'),
+			array('field' => 'password', 'label' => '密码', 'rules' => 'required|max_length[32]|min_length[6]'),
+			array('field' => 'repassword', 'label' => '确认密码', 'rules' => 'required|max_length[32]|min_length[6]|matches[password]'),
+			array('field' => 'email', 'label' => '邮箱', 'rules' => 'required|valid_email')
 		);
 		
 		$this->form_validation->set_rules($validation);
@@ -126,36 +108,12 @@ class Admin extends MY_Controller{
 		$this->load->library('form_validation');
 				
 		$validation = array(
-			array(
-				'field' => 'id',
-				'label' => 'id',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'role',
-				'label' => '用户组',
-				'rules' => 'required|is_natural_no_zero'
-			),
-			array(
-				'field' => 'name',
-				'label' => '用户名',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'password',
-				'label' => '密码',
-				'rules' => 'required|max_length[32]|min_length[6]'
-			),
-			array(
-				'field' => 'repassword',
-				'label' => '确认密码',
-				'rules' => 'required|max_length[32]|min_length[6]|matches[password]'
-			),
-			array(
-				'field' => 'email',
-				'label' => '邮箱',
-				'rules' => 'required|valid_email'
-			)
+			array('field' => 'id', 'label' => 'id',	 'rules' => 'required'),
+			array('field' => 'role', 'label' => '用户组', 'rules' => 'required|is_natural_no_zero'),
+			array('field' => 'name', 'label' => '用户名', 'rules' => 'required'),
+			array('field' => 'password', 'label' => '密码', 'rules' => 'required|max_length[32]|min_length[6]'),
+			array('field' => 'repassword', 'label' => '确认密码', 'rules' => 'required|max_length[32]|min_length[6]|matches[password]'),
+			array('field' => 'email', 'label' => '邮箱', 'rules' => 'required|valid_email')
 		);
 		
 		$this->form_validation->set_rules($validation);

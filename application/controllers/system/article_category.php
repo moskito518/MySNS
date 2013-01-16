@@ -3,6 +3,8 @@
 class Article_category extends MY_Controller{
 	public function __construct(){
 		parent::__construct();
+		$this->checkAdminRights();
+		$this->load->library('menu');
 	}
 	
 	//文章分类列表
@@ -28,21 +30,9 @@ class Article_category extends MY_Controller{
 		$this->load->library('form_validation');
 		
 		$validation = array(
-			array(
-				'field' => 'title',
-				'label' => '分类名称',
-				'rules' => 'required|max_length[24]'
-			),
-			array(
-				'field' => 'order',
-				'label' => '分类排序',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'description',
-				'label' => '分类描述',
-				'rules' => 'required'
-			)
+			array('field' => 'title', 'label' => '分类名称', 'rules' => 'required|max_length[24]'),
+			array('field' => 'order', 'label' => '分类排序', 'rules' => 'required'),
+			array('field' => 'description', 'label' => '分类描述', 'rules' => 'required')
 		);
 		
 		$this->form_validation->set_rules($validation);
@@ -84,26 +74,10 @@ class Article_category extends MY_Controller{
 		$this->load->library('form_validation');
 		
 		$validation = array(
-			array(
-				'field' => 'id',
-				'label' => 'id',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'title',
-				'label' => '分类名称',
-				'rules' => 'required|max_length[24]'
-			),
-			array(
-				'field' => 'order',
-				'label' => '分类排序',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'description',
-				'label' => '分类简介',
-				'rules' => 'required'
-			)
+			array('field' => 'id', 'label' => 'id', 'rules' => 'required'),
+			array('field' => 'title','label' => '分类名称',	'rules' => 'required|max_length[24]'),
+			array('field' => 'order','label' => '分类排序','rules' => 'required'),
+			array('field' => 'description','label' => '分类简介','rules' => 'required')
 		);
 		
 		$this->form_validation->set_rules($validation);

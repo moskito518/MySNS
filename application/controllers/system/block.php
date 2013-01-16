@@ -4,6 +4,8 @@ class Block extends MY_Controller{
 	
 	public function __construct(){
 		parent::__construct();
+		$this->checkAdminRights();
+		$this->load->library('menu');
 	}
 	
 	private function alert($msg)

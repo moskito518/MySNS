@@ -4,6 +4,8 @@ class Role extends MY_Controller{
 	
 	public function __construct(){
 		parent::__construct();
+		$this->checkAdminRights();
+		$this->load->library('menu');
 	}
 	
 	//角色列表
@@ -43,16 +45,8 @@ class Role extends MY_Controller{
 		$this->load->library('form_validation');
 		
 		$validation = array(
-			array(
-				'field' => 'name',
-				'label' => '名称',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'right[]',
-				'label' => '权限',
-				'rules' => 'required'
-			),
+			array('field' => 'name','label' => '名称','rules' => 'required'),
+			array('field' => 'right[]',	'label' => '权限','rules' => 'required'),
 		);
 		
 		$this->form_validation->set_rules($validation);
@@ -88,21 +82,9 @@ class Role extends MY_Controller{
 		$this->load->library('form_validation');
 		
 		$validation = array(
-			array(
-				'field' => 'name',
-				'label' => '角色名称',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'right[]',
-				'label' => '权限',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'id',
-				'label' => 'id',
-				'rules' => 'required'
-			)
+			array('field' => 'name','label' => '角色名称','rules' => 'required'),
+			array('field' => 'right[]','label' => '权限','rules' => 'required'),
+			array('field' => 'id','label' => 'id','rules' => 'required'	)
 		);
 		
 		$this->form_validation->set_rules($validation);

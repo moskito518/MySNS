@@ -11,21 +11,12 @@ class Systemadmin extends CI_Controller{
 	
 	public function login(){
 		$data['page_title'] = '登录';
-		echo '123';
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		
 		$validation = array(
-			array(
-				'field' => 'name',
-				'label' => '用户名',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'password',
-				'label' => '密码',
-				'rules' => 'required'
-			)
+			array('field' => 'name','label' => '用户名','rules' => 'required'),
+			array('field' => 'password','label' => '密码','rules' => 'required')
 		);
 		
 		$this->form_validation->set_rules($validation);
