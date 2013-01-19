@@ -66,6 +66,20 @@ class MY_Controller extends CI_Controller{
 		}
 	}
 	
+	//前台用户登录检查
+	public function checkUser(){
+		$user = array();
+		$user['uid'] = $this->input->cookie('uid');
+		$user['user_name'] = $this->input->cookie('user_name');
+		
+		if($user['uid'] == null && $user['user_name'] == null){
+			redirect('simple/login');
+			exit;
+		}
+		
+		$this->user = $user;
+	}
+	
 	//加载site config
 	public function loadSiteConfig(){
 		$configData = $this->base_model->getData('site_config');
