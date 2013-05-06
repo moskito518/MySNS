@@ -12,10 +12,6 @@ class Simple extends MY_Controller{
 		$this->user = $user;
 	}
 	
-	public function index(){
-		$this->load->view('simple/index');
-	}
-	
 	//注册用户
 	public function reg(){
 		if($this->user['uid'] != null && $this->user['user_name'] != null){
@@ -74,7 +70,7 @@ class Simple extends MY_Controller{
 	//前台用户登录
 	public function login(){
 		if($this->user['uid'] != null && $this->user['user_name'] != null){
-			redirect('simple/index');
+			redirect('ucenter/index');
 			exit;
 		}
 		
@@ -100,7 +96,7 @@ class Simple extends MY_Controller{
 				set_cookie('user_name', $checkLoginData['user_name']);
 				set_cookie('uid', $checkLoginData['id']);
 				
-				util::showMessage('登录成功！', 'simple/login');
+				util::showMessage('登录成功！', 'ucenter/index');
 			}else{
 				util::showMessage('用户名不存在或密码不正确!');
 				exit;
