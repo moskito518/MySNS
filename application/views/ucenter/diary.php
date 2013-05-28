@@ -15,6 +15,7 @@
 	<label for="diary_content">内容</label>
 	<input type="button" value="上传图片" id="J_selectImage" />
 	<textarea name="diary_content" id="diary_content" style="width:300px;height:200px;"></textarea>
+	<div id="diary_content"></div>
 </div>
 <div>
 	<input type="submit" value="发表" />

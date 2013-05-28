@@ -30,7 +30,7 @@ class Systemadmin extends CI_Controller{
 			$userWhere = "name = '" . $name . "'";
 			$userRow = $this->base_model->getDataRow('admin', $userWhere);
 			
-			if($userRow['password'] === md5($password)){
+			if(!empty($userRow) && $userRow['password'] === md5($password)){
 				$newData = array(
 					'admin_id' => $userRow['id'],
 					'admin_name' => $userRow['name'],

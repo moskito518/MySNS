@@ -18,6 +18,7 @@ class Util{
 			
 		}
 		
+		header('Content-Type:text/html; charset=utf-8');
 		echo '<script>alert(\'' . $message . '\');window.location.href = \'' . $redirect_url . '\';</script>';
 		
 		exit;
@@ -40,6 +41,7 @@ class Util{
 			
 		}
 		
+		header('Content-Type:text/html; charset=utf-8');
 		echo '<script>if(confirm("' . $message . '"))'.
 				'{window.location.href = \'' . $redirect_url .
 				'\'}else{window.location.href = \'' . $redirect_url .
