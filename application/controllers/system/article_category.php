@@ -15,7 +15,7 @@ class Article_category extends MY_Controller{
 		$order = 'order ASC';
 		$data['article_category'] = $this->base_model->getData('article_category', $where, $fields, $order);
 		
-		if(!file_exists("application/views/system/article/article_category_list.php")){
+		if(!file_exists("application/views/system/article/category.php")){
 			show_404();
 		}else{
 			$this->load->view('system/article/article_category_list', $data);
